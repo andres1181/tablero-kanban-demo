@@ -1,45 +1,24 @@
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import ColumnaTareas from 'src/components/Tablero/ColumnaTareas.vue';
+import { useTareasStore } from 'src/stores/useTareasStore.js'
+
+import { storeToRefs } from 'pinia'
+//import { computed } from "@vue";
 
 export default {
   setup() {
-    const tareasPorHacer = ref([{
-      'titulo': 'Tarea 3', 'descripcion': 'Analisis de informacion',
-      'encargado': 'Juan',
-      'estado': 'porHacer',
-    },
-    {
-      'titulo': 'Tarea 4', 'descripcion': 'Analisis de informacion',
-      'encargado': 'Juan',
-      'estado': 'porHacer',
-    },
-    {
-      'titulo': 'Tarea 5', 'descripcion': 'Analisis de informacion',
-      'encargado': 'Juan',
-      'estado': 'porHacer',
-    },
-    {
-      'titulo': 'Tarea 6', 'descripcion': 'Analisis de informacion',
-      'encargado': 'Juan',
-      'estado': 'porHacer',
-    }
-  ])
-    const tareasEnProgreso = ref([{
-      'titulo': 'Tarea 2', 'descripcion': 'Analisis de informacion',
-      'encargado': 'Juan',
-      'estado': 'enProgreso',
-    }])
-    const tareasTerminadas = ref([{
-      'titulo': 'Tarea 1', 'descripcion': 'Analisis de informacion',
-      'encargado': 'Juan',
-      'estado': 'terminada',
-    }])
+const { getTareasByTipo } = storeToRefs(useTareasStore())
+const {cambiarEstado} = useTareasStore()
+    const tareasPorHacer = computed(() => { return getTareasByTipo.value('porHacer')})
+    const tareasEnProgreso = computed(() => { return getTareasByTipo.value('enProgreso') })
+    const tareasTerminadas = computed(() => { return getTareasByTipo.value('terminada') })
 
     return {
       tareasPorHacer,
       tareasEnProgreso,
-      tareasTerminadas
+      tareasTerminadas,
+      cambiarEstado
 
     }
   },
@@ -47,7 +26,7 @@ export default {
 }
 </script>
 <template>
-  <q-page padding >
+  <q-page padding>
     <q-card flat class="row my-card q-pa-sm">
       <ColumnaTareas class="col-12 col-sm-4 " :info="{ 'nombre': 'Por Hacer', 'tipo': 'porHacer' }"
         :lista="tareasPorHacer"></ColumnaTareas>
@@ -56,5 +35,6 @@ export default {
       <ColumnaTareas class="col-12 col-sm-4" :info="{ 'nombre': 'Terminado', 'tipo': 'terminado' }"
         :lista="tareasTerminadas"></ColumnaTareas>
     </q-card>
-</q-page></template>
+  </q-page>
+</template>
 <style></style>

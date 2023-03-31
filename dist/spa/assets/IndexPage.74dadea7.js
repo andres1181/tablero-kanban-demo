@@ -1,0 +1,1 @@
+import{Q as o}from"./QPage.17328ebd.js";import{_ as r,F as t,S as a,G as s,H as n,U as c}from"./index.1c000e60.js";import"./render.e562bc2c.js";const p=t({name:"IndexPage",setup(){const e=c();return a(()=>{e.push("/tablero")}),{}}});function f(e,u,_,m,d,i){return s(),n(o,{class:"flex flex-center"})}var g=r(p,[["render",f]]);export{g as default};

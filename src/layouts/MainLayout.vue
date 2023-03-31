@@ -1,57 +1,36 @@
 <template>
-  <q-layout view="lHh lpr lFf" class="
+  <q-layout view="hHh lpr lFf" class="
     q-layout-space">
-    <q-header elevated class="bg-black">
+    <q-header bordered class="text-grey-9 bg-white">
       <q-toolbar>
         <q-btn flat @click="drawer = !drawer" round dense icon="menu"></q-btn>
-        <q-toolbar-title>Header</q-toolbar-title>
+        <q-toolbar-title>Demo 'Tablero Kanban'</q-toolbar-title>
       </q-toolbar>
     </q-header>
     <q-drawer v-model="drawer" show-if-above :mini="miniState" @mouseover="miniState = false" @mouseout="miniState = true"
-      :width="200" :breakpoint="500" bordered class="bg-grey-3">
+      :width="200" :breakpoint="500" bordered class="text-white bg-grey-9">
       <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
         <q-list padding>
-          <q-item clickable v-ripple>
+          <q-item clickable v-ripple to="/tablero">
             <q-item-section avatar>
-              <q-icon name="inbox"></q-icon>
+              <q-icon name="mdi-cards"></q-icon>
             </q-item-section>
 
             <q-item-section>
-              Inbox
+              Tablero
             </q-item-section>
           </q-item>
 
-          <q-item active clickable v-ripple>
+          <q-item clickable v-ripple to="/equipo">
             <q-item-section avatar>
-              <q-icon name="star"></q-icon>
+              <q-icon name="mdi-account"></q-icon>
             </q-item-section>
 
             <q-item-section>
-              Star
+              Equipo
             </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon name="send"></q-icon>
-            </q-item-section>
-
-            <q-item-section>
-              Send
-            </q-item-section>
-          </q-item>
-
-          <q-separator></q-separator>
-
-          <q-item clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon name="drafts"></q-icon>
-            </q-item-section>
-
-            <q-item-section>
-              Drafts
-            </q-item-section>
-          </q-item>
         </q-list>
       </q-scroll-area>
     </q-drawer>
@@ -89,6 +68,10 @@ export default defineComponent({
 })
 </script>
 <style>
+.my-menu-link {
+  color: white;
+  background: green;
+}
 .q-layout-space {
   height: 100vh;
   /* altura igual al 100% de la pantalla */
@@ -104,7 +87,8 @@ export default defineComponent({
 .q-page-container-space {
   flex: 1;
   /* para que ocupe todo el espacio disponible en el contenedor */
-  overflow-y: auto;
+  overflow-y: scroll;
   /* para agregar scroll si es necesario */
+ /*  padding-right: 20px; */
 }
 </style>

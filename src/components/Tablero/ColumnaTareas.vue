@@ -1,6 +1,7 @@
 <script>
 import { ref, toRef } from 'vue'
 import TarjetaComp from 'components/Tarjetas/TarjetaComp.vue'
+import TarjetaForm from '../Tarjetas/TarjetaForm.vue'
 export default {
   props: {
     info: {
@@ -14,12 +15,21 @@ export default {
   setup(props) {
     const infoColumna = toRef(props, 'info')
     const listaTareas = toRef(props, 'lista')
+    const crear = ref(false)
+    const editar = ref(false)
+    const cerrarFormulario = () => {
+      crear.value = false
+      editar.value = false
+    }
     return {
+      cerrarFormulario,
       infoColumna,
-      listaTareas
+      listaTareas,
+      crear,
+      editar
     }
   },
-  components: { TarjetaComp }
+  components: { TarjetaComp, TarjetaForm }
 }
 </script>
 <template>
@@ -34,20 +44,8 @@ export default {
         </div>
 
           <div class="col-auto">
-            <q-btn v-if="infoColumna.tipo === 'porHacer'" color="grey-7" round flat icon="mdi-plus">
-              <q-menu cover auto-close>
-                <q-list>
-                  <q-item clickable>
-                    <q-item-section>Remove Card</q-item-section>
-                  </q-item>
-                  <q-item clickable>
-                    <q-item-section>Send Feedback</q-item-section>
-                  </q-item>
-                  <q-item clickable>
-                    <q-item-section>Share</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
+            <q-btn v-if="infoColumna.tipo === 'porHacer'" color="grey-7" round flat icon="mdi-plus" @click="crear = true">
+
             </q-btn>
           </div>
         </div>
@@ -59,6 +57,8 @@ export default {
         </q-card-section> -->
       <q-card-section class=" ">
        <div class="q-gutter-md  ">
+        <TarjetaForm v-if="crear" @cerrarFormulario="cerrarFormulario" :crearProp="true"></TarjetaForm>
+
           <!-- contenido de la tercera sección -->
           <TarjetaComp v-for="(tarea, index) in listaTareas"  :key="index" :info="tarea"></TarjetaComp>
         </div>
