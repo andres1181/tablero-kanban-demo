@@ -1,13 +1,4 @@
 {
-  "builds": [
-    {
-      "src": "quasar.conf.js",
-      "use": "@now/static-build",
-      "config": {
-        "maxLambdaSize": "50mb"
-      }
-    }
-  ],
   "routes": [{ "handle": "filesystem" }, { "src": "/.*", "dest": "/" }]
 
 }
