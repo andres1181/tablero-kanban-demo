@@ -1,3 +1,15 @@
 {
-  "routes": [{ "handle": "filesystem" }, { "src": "/.*", "dest": "/" }]
+  "builds": [
+    {
+      "src": "quasar.conf.js",
+      "use": "@now/static-build",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
+    }
+  ],
+  "routes": [{ "handle": "filesystem" }, { "src": "/.*", "dest": "/" }],
+  "install": {
+    "include": ["^quasar"]
+  }
 }
